@@ -12,11 +12,11 @@ var files = [
   './index.html?utm=homescreen', //SW treats query string as new page
   './css/styles.css',
   'https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700', //caching 3rd party content
-  './images/icons/android-chrome-192x192.png',
+  './images/icons/CalcIcon192.png',
   './images/push-on.png',
   './images/push-off.png',
-  './images/icons/favicon-16x16.png',
-  './images/icons/favicon-32x32.png',
+  './images/icons/favCalcIcon-16x16.png',
+  './images/icons/favCalcIcon-32x32.png',
   './js/app.js',
   './js/offline.js',
   './js/push.js',
