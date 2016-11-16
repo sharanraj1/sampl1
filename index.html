@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html class="js no-touchevents" lang="en">
-
-<head>
+<html>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calc Sharan</title>
-    <link async rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,600,300italic,600italic" rel="stylesheet" type="text/css">
+    <title>Progressive Web Application</title>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=description content="This web application will work in offline, has a splash screen add to home screen etc,.">
+    <meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0288d1">
+    <meta name="msapplication-TileColor" content="#0288d1">
+    <meta name="msapplication-TileImage" content="./images/icons/mstile-150x150.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Progressive Web Application">
+    <meta name="application-name" content="Progressive Web Application">
+    <link rel="apple-touch-icon" href="./images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="./images/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="./images/icons/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#29BDBB">
-    <link rel="icon" sizes="192x192" href="./launcher-icon-8x.png">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700">
+    <link rel="stylesheet" href="./css/styles.css">
+	
+	
     <style type="text/css">
         /* Basic reset */
        {
@@ -159,15 +169,28 @@
         }
 
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
+  <div class="app app__layout">
     <header>
-        <div class="content">
-            <h3>Calculator Sharan</h3>
-        </div>
+      <span class="header__icon">
+        <svg class="menu__icon no--select" width="24px" height="24px" viewBox="0 0 48 48" fill="#fff">
+          <path d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"></path>
+        </svg>
+      </span>
+
+      <span class="header__title no--select">Progressive Web Application</span>
     </header>
-    <div class="container">
+
+    <div class="menu">
+      <div class="menu__header"></div>
+      <ul class="menu__list">
+        <li><a target="_blank" rel="noopener" href="https://github.com/gokulkrishh">Author</a></li>
+        <li><a target="_blank" rel="noopener" href="https://github.com/gokulkrishh/demo-progressive-web-app">Source</a></li>
+    </div>
+    <div class="menu__overlay"></div>
+	
+	<div class="container">
        <div id="calculator">
             <!-- Screen and clear key -->
             <div class="top">
@@ -188,7 +211,7 @@
                 <span>1</span>
                 <span>2</span>
                 <span>3</span>
-                <span class="operator">Ã·</span>
+                <span class="operator">÷</span>
                 <span>0</span>
                 <span>.</span>
                 <span class="eval">=</span>
@@ -196,12 +219,19 @@
             </div>
         </div>
     </div>
+   
+	
+	
+	
+	
+	
+  </div>
 
-
-    <script type="text/javascript">
+  
+  <script type="text/javascript">
         // Get all the keys from document
     var keys = document.querySelectorAll('#calculator span');
-    var operators = ['+', '-', 'x', 'Ã·'];
+    var operators = ['+', '-', 'x', '÷'];
     var decimalAdded = false;
 
     // Add onclick event to all the keys and perform operations
@@ -224,8 +254,8 @@
                 var equation = inputVal;
                 var lastChar = equation[equation.length - 1];
                 
-                // Replace all instances of x and Ã· with * and / respectively. This can be done easily using regex and the 'g' tag which will replace all instances of the matched character/substring
-                equation = equation.replace(/x/g, '*').replace(/Ã·/g, '/');
+                // Replace all instances of x and ÷ with * and / respectively. This can be done easily using regex and the 'g' tag which will replace all instances of the matched character/substring
+                equation = equation.replace(/x/g, '*').replace(/÷/g, '/');
                 
                 // Final thing left to do is checking the last character of the equation. If it's an operator or a decimal, remove it
                 if(operators.indexOf(lastChar) > -1 || lastChar == '.')
@@ -287,8 +317,25 @@
     </script>
     <!-- PrefixFree -->
     <script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
-    <script src="./js/build/vendor.min.js"></script>
-    <script src="./js/build/script.min.js"></script>
-</body>
-
+	
+  <!-- JS Files  -->
+  <script type="text/javascript">
+  //If serviceWorker supports, then register it.
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register('./serviceWorker.js', { scope: "./" }) //setting scope of sw
+    .then(function (registration) {
+      console.info('Service worker is registered!');
+    })
+    .catch(function (error) {
+      console.error('Service worker failed ', error);
+    });
+  }
+  </script>
+  <script src="./js/toast.js"></script>
+  <script src="./js/offline.js"></script>
+  <script src="./js/app.js"></script>
+  <script src="./js/push.js"></script>
+  <script src="./js/sync.js"></script>
+  <script src="./js/share.js"></script>
+  </body>
 </html>
